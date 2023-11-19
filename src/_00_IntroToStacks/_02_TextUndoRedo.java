@@ -15,6 +15,7 @@ public class _02_TextUndoRedo implements KeyListener {
 JFrame frame= new JFrame();
 JPanel panel=new JPanel();
 JLabel label= new JLabel();
+String labelLength;
 void setup() {
 	frame.add(panel);
 	panel.add(label);
@@ -47,8 +48,17 @@ public void keyTyped(KeyEvent e) {
 @Override
 public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
-	char pressed=e.getKeyChar();
-	label.setText(label.getText()+pressed);
+
+	if (e.getKeyCode()==KeyEvent.VK_BACK_SPACE) {
+		labelLength=label.getText();
+		int len=labelLength.length();
+		String sub=labelLength.substring(0,len-1);
+		label.setText(sub);
+	}
+	else {
+		char pressed=e.getKeyChar();
+		label.setText(label.getText()+pressed);
+	}
 }
 @Override
 public void keyReleased(KeyEvent e) {
