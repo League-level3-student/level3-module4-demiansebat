@@ -38,7 +38,7 @@ import org.junit.Test;
  * Complete the calculateWaitTime() method to return the amount of time it
  * takes to get the tickets.
  *  
- * You managed to send your friend to queue for tickets in your stead, but
+ * You managed to send your friend to queue for tickets instead of doing it yourself because your lazy, but
  * there is a catch: he will get there only if you tell him how much that is
  * going to take. And everybody can only take ONE TICKET at a time, then they
  * go back in the last position of the queue if they need more (or go home if

@@ -34,8 +34,11 @@ import java.util.ArrayDeque;
 import java.util.Random;
 import java.util.Stack;
 
+import _00_IntroToStacks._02_TextUndoRedo;
+
 public class _01_IntroToQueue {
     public static void main(String[] args) {
+    	_01_IntroToQueue huh= new _01_IntroToQueue();
         // 1. Create a Stack of Doubles using the Stack class
         //    Note: you have to use the capitalized Double and not double
 Stack <Double> stackD= new Stack();
@@ -56,13 +59,24 @@ queueD.add(stackD.pop());
         // 5. Print and remove a random number of elements, from 1 to 5 elements,
         //    from the front of the Queue. Example:
         //    "removing 3 elements from Queue: 25 57 2"
-System.out.println();
+
+int hmm=randy.nextInt(5);
+for (int i = 0; i < hmm; i++) {
+	System.out.println(queueD.element()); 
+	queueD.remove();
+}
         // 6. Pop off as many elements from the stack to fill the Queue with 5
         //    elements. If there aren't enough elements in the Stack to fill the 
         //    queue, fill the queue as much as possible. 
-
+int queueLeft= 5-queueD.size();
+for (int i = 0; i < queueLeft; i++) {
+	queueD.add(stackD.pop());
+}
         // 7. Loop until there are no more elements in either the Stack or Queue
         //    and all the elements are printed
-        
+        for (int i = 0; i < queueD.size(); i++) {
+        	System.out.println(queueD.element()); 
+        	queueD.remove();
+		}
     }
 }
