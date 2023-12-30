@@ -61,25 +61,17 @@ import java.util.Stack;
 public class _02_BaseballTickets {
 
     public static int calculateWaitTime( ArrayDeque<Integer> ticketsQueue, int position ) {
+while(position){
     	int minutes=0;
-    	Stack <Integer> lastFirst= new Stack();
-  // make a boolean and do something while the boolean is true that position==0 and the thing at position 0 has a value of 0. they both have to be true.  while(/) {
-			int last=ticketsQueue.remove();
-			ticketsQueue.add(last-1);
-			minutes++;
-			if (last==0 && position==0) {
-				return minutes;
-			}
-		}
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-		return 0;
-        
-      
+    	int last=ticketsQueue.remove();
+		ticketsQueue.add(last-1);
+		minutes++;
+	
+while(position==0 && ticketsQueue.element()==0) {
+	ticketsQueue.remove();
+}
+}
+return minutes;
+
     }
 }
