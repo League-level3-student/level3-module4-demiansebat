@@ -60,18 +60,33 @@ import java.util.Stack;
 
 public class _02_BaseballTickets {
 
-    public static int calculateWaitTime( ArrayDeque<Integer> ticketsQueue, int position ) {
-while(position){
-    	int minutes=0;
-    	int last=ticketsQueue.remove();
-		ticketsQueue.add(last-1);
-		minutes++;
-	
-while(position==0 && ticketsQueue.element()==0) {
-	ticketsQueue.remove();
-}
-}
-return minutes;
+	public static int calculateWaitTime(ArrayDeque<Integer> ticketsQueue, int position) {
 
-    }
+		boolean hmm = true;
+		int minutes = 0;
+		while (hmm == true) {
+			int last = ticketsQueue.remove();
+			minutes++;
+			last--;
+			if (last > 0) {
+				ticketsQueue.add(last);
+			}
+			if (position > 0) {
+				position--;
+			}
+			if (position == 0) {
+				
+			if(last>0) {
+				position=ticketsQueue.size();
+			}
+			else {
+					hmm = false;
+					return minutes;
+				}
+			}
+		}
+
+		return 0;
+
+	}
 }
