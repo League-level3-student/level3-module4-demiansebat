@@ -38,7 +38,7 @@ import _00_IntroToStacks._02_TextUndoRedo;
 
 public class _01_IntroToQueue {
     public static void main(String[] args) {
-    	_01_IntroToQueue huh= new _01_IntroToQueue();
+    	
         // 1. Create a Stack of Doubles using the Stack class
         //    Note: you have to use the capitalized Double and not double
 Stack <Double> stackD= new Stack();

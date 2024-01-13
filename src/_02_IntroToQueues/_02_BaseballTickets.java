@@ -61,7 +61,7 @@ import java.util.Stack;
 public class _02_BaseballTickets {
 
 	public static int calculateWaitTime(ArrayDeque<Integer> ticketsQueue, int position) {
-
+position=position+1;
 		boolean hmm = true;
 		int minutes = 0;
 		while (hmm == true) {
