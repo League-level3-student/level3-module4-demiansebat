@@ -1,5 +1,7 @@
 package _03_Hangman;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -7,30 +9,70 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Hangman {
+public class Hangman implements KeyListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
-	JLabel label= new JLabel();
+	JLabel label = new JLabel();
+	int lives = 10;
+	String displayPop;
 
-void setup() {
-	frame.add(panel);
-	frame.pack();
-	panel.add(label);
-	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-	String wordsInput=JOptionPane.showInputDialog("Enter a number of rounds you would like to play (from 1 to 100)");
-	int numWords= Integer.parseInt(wordsInput);
-	Stack<String> rounds = new Stack<String>();
-	for (int i = 0; i < numWords; i++) {
-		String random= Utilities.readRandomLineFromFile("dictionary.txt");
-		rounds.push(random);
+	public static void main(String[] args) {
+		Hangman hang = new Hangman();
+		hang.setup();
+
 	}
-	String display=rounds.pop();
-	StringBuilder sb = new StringBuilder(display.length());
-    for (int i = 0; i < display.length(); i++) {
-        sb.append("_ ");
-    }
-    //need to print sb which is my word made of underscores
+
+	void setup() {
+		frame.add(panel);
+		frame.pack();
+		panel.add(label);
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.addKeyListener(this);
+		String wordsInput = JOptionPane
+				.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
+		int numWords = Integer.parseInt(wordsInput);
+		Stack<String> rounds = new Stack<String>();
+		for (int i = 0; i < numWords; i++) {
+			String random = Utilities.readRandomLineFromFile("dictionary.txt");
+			rounds.push(random);
+		}
+		String display = rounds.pop();
+		displayPop = display;
+		StringBuilder sb = new StringBuilder(display.length());
+	
+			String newDisplay = sb.toString();
+			label.setText(newDisplay);
+		}
+	
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		char pressed1 = e.getKeyChar();
+		if (displayPop.contains("" + pressed1)) {
+StringBuilder containsChar= new StringBuilder(displayPop.length());
+for (int i = 0; i < displayPop.length(); i++) {
+	//need to reprint the stringbuilder, with it having guessed letters
+	//if() {
+	//containsChar.append("_ ");
+	//}
 }
+		} else {
+			lives--;
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
 }
 //Step 1: When the program starts, it will ask the user for a number (up to the total words in the file). Then the 
 //program will read that many words from the "dictionary.txt" file and push them to a Stack. 
