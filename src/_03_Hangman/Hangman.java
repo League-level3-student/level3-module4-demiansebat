@@ -2,6 +2,7 @@ package _03_Hangman;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -15,6 +16,8 @@ public class Hangman implements KeyListener {
 	JLabel label = new JLabel();
 	int lives = 10;
 	String displayPop;
+	String newDisplay;
+	char[] newLetter;
 
 	public static void main(String[] args) {
 		Hangman hang = new Hangman();
@@ -29,8 +32,7 @@ public class Hangman implements KeyListener {
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.addKeyListener(this);
-		String wordsInput = JOptionPane
-				.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
+		String wordsInput = JOptionPane.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
 		int numWords = Integer.parseInt(wordsInput);
 		Stack<String> rounds = new Stack<String>();
 		for (int i = 0; i < numWords; i++) {
@@ -40,11 +42,13 @@ public class Hangman implements KeyListener {
 		String display = rounds.pop();
 		displayPop = display;
 		StringBuilder sb = new StringBuilder(display.length());
-	
-			String newDisplay = sb.toString();
-			label.setText(newDisplay);
-		}
-	
+			for (int i = 0; i < displayPop.length(); i++) {
+				sb.append("_ ");
+			}
+		newDisplay = sb.toString();
+		newLetter= newDisplay.toCharArray();
+		label.setText(newDisplay);
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -55,19 +59,28 @@ public class Hangman implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		int charPosition=0;
 		char pressed1 = e.getKeyChar();
+
+		StringBuilder containsChar = new StringBuilder(displayPop.length());
 		if (displayPop.contains("" + pressed1)) {
-StringBuilder containsChar= new StringBuilder(displayPop.length());
-for (int i = 0; i < displayPop.length(); i++) {
-	//need to reprint the stringbuilder, with it having guessed letters
-	//if() {
-	//containsChar.append("_ ");
-	//}
-}
+			
+			for (int i = 0; i < displayPop.length(); i++) {
+			if((displayPop.charAt(i))==(pressed1)) {
+				//String ok= 
+				charPosition= i;
+				newLetter[charPosition]=(pressed1);
+				System.out.println("New Word: " + new String(newLetter) + " \nPosition "+ i);
+				label.setText(new String (newLetter));
+			}
+			
+			}
+
 		} else {
 			lives--;
 		}
 	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
