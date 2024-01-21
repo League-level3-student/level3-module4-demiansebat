@@ -48,6 +48,7 @@ public class Hangman implements KeyListener {
 		newDisplay = sb.toString();
 		newLetter= newDisplay.toCharArray();
 		label.setText(newDisplay);
+		//rounds.pop(); (pop this off and then set label to this new variable, fix round stuff)
 	}
 
 	@Override
@@ -67,9 +68,8 @@ public class Hangman implements KeyListener {
 			
 			for (int i = 0; i < displayPop.length(); i++) {
 			if((displayPop.charAt(i))==(pressed1)) {
-				//String ok= 
 				charPosition= i;
-				newLetter[charPosition]=(pressed1);
+				newLetter[charPosition*2]=(pressed1);
 				System.out.println("New Word: " + new String(newLetter) + " \nPosition "+ i);
 				label.setText(new String (newLetter));
 			}
