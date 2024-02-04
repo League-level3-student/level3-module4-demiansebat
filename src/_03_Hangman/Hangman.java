@@ -18,10 +18,13 @@ public class Hangman implements KeyListener {
 	String displayPop;
 	String newDisplay;
 	char[] newLetter;
-
+	int complete=0;
+	StringBuilder sb;
+	Stack<String> rounds = new Stack<String>();
 	public static void main(String[] args) {
 		Hangman hang = new Hangman();
 		hang.setup();
+
 
 	}
 
@@ -34,21 +37,19 @@ public class Hangman implements KeyListener {
 		frame.addKeyListener(this);
 		String wordsInput = JOptionPane.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
 		int numWords = Integer.parseInt(wordsInput);
-		Stack<String> rounds = new Stack<String>();
 		for (int i = 0; i < numWords; i++) {
 			String random = Utilities.readRandomLineFromFile("dictionary.txt");
 			rounds.push(random);
 		}
 		String display = rounds.pop();
 		displayPop = display;
-		StringBuilder sb = new StringBuilder(display.length());
+		sb = new StringBuilder(display.length());
 			for (int i = 0; i < displayPop.length(); i++) {
 				sb.append("_ ");
 			}
 		newDisplay = sb.toString();
 		newLetter= newDisplay.toCharArray();
 		label.setText(newDisplay);
-		//rounds.pop(); (pop this off and then set label to this new variable, fix round stuff)
 	}
 
 	@Override
@@ -72,6 +73,18 @@ public class Hangman implements KeyListener {
 				newLetter[charPosition*2]=(pressed1);
 				System.out.println("New Word: " + new String(newLetter) + " \nPosition "+ i);
 				label.setText(new String (newLetter));
+				complete++;
+			//	if (complete==displayPop.length()) {
+				//	displayPop=rounds.pop();
+				//	label.setText(displayPop);
+				//	sb = new StringBuilder(displayPop.length());
+				//	for (int j = 0; j < displayPop.length(); j++) {
+				//		sb.append("_ ");
+				//}
+				//	newDisplay = sb.toString();
+				//	newLetter= newDisplay.toCharArray();
+				//	label.setText(newDisplay);
+				//}
 			}
 			
 			}
