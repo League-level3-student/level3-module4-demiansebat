@@ -2,6 +2,7 @@ package _03_Hangman;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -18,13 +19,14 @@ public class Hangman implements KeyListener {
 	String displayPop;
 	String newDisplay;
 	char[] newLetter;
-	int complete=0;
+	int complete = 0;
 	StringBuilder sb;
 	Stack<String> rounds = new Stack<String>();
+	ArrayList<String> usedBefore = new ArrayList<String>();
+
 	public static void main(String[] args) {
 		Hangman hang = new Hangman();
 		hang.setup();
-
 
 	}
 
@@ -35,7 +37,8 @@ public class Hangman implements KeyListener {
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.addKeyListener(this);
-		String wordsInput = JOptionPane.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
+		String wordsInput = JOptionPane
+				.showInputDialog("Enter a number of rounds you would like to play (from 1 to 266)");
 		int numWords = Integer.parseInt(wordsInput);
 		for (int i = 0; i < numWords; i++) {
 			String random = Utilities.readRandomLineFromFile("dictionary.txt");
@@ -44,11 +47,11 @@ public class Hangman implements KeyListener {
 		String display = rounds.pop();
 		displayPop = display;
 		sb = new StringBuilder(display.length());
-			for (int i = 0; i < displayPop.length(); i++) {
-				sb.append("_ ");
-			}
+		for (int i = 0; i < displayPop.length(); i++) {
+			sb.append("_ ");
+		}
 		newDisplay = sb.toString();
-		newLetter= newDisplay.toCharArray();
+		newLetter = newDisplay.toCharArray();
 		label.setText(newDisplay);
 	}
 
@@ -61,32 +64,32 @@ public class Hangman implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int charPosition=0;
+		int charPosition = 0;
 		char pressed1 = e.getKeyChar();
 
 		StringBuilder containsChar = new StringBuilder(displayPop.length());
 		if (displayPop.contains("" + pressed1)) {
-			
+
 			for (int i = 0; i < displayPop.length(); i++) {
-			if((displayPop.charAt(i))==(pressed1)) {
-				charPosition= i;
-				newLetter[charPosition*2]=(pressed1);
-				System.out.println("New Word: " + new String(newLetter) + " \nPosition "+ i);
-				label.setText(new String (newLetter));
-				complete++;
-			//	if (complete==displayPop.length()) {
-				//	displayPop=rounds.pop();
-				//	label.setText(displayPop);
-				//	sb = new StringBuilder(displayPop.length());
-				//	for (int j = 0; j < displayPop.length(); j++) {
-				//		sb.append("_ ");
-				//}
-				//	newDisplay = sb.toString();
-				//	newLetter= newDisplay.toCharArray();
-				//	label.setText(newDisplay);
-				//}
-			}
-			
+				if ((displayPop.charAt(i)) == (pressed1)) {
+					charPosition = i;
+					newLetter[charPosition * 2] = (pressed1);
+					System.out.println("New Word: " + new String(newLetter) + " \nPosition " + i);
+					label.setText(new String(newLetter));
+					if (!label.getText().contains("_")) {
+
+						displayPop = rounds.pop();
+						sb = new StringBuilder(displayPop.length());
+						for (int j = 0; j < displayPop.length(); j++) {
+							sb.append("_ ");
+						}
+						newDisplay = sb.toString();
+						newLetter = newDisplay.toCharArray();
+						label.setText(newDisplay);
+					}
+
+				}
+
 			}
 
 		} else {
