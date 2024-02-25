@@ -15,7 +15,8 @@ public class Hangman implements KeyListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
-	int lives = 10;
+	JLabel liveCount= new JLabel();
+	int lives = 50;
 	String displayPop;
 	String newDisplay;
 	char[] newLetter;
@@ -34,6 +35,7 @@ public class Hangman implements KeyListener {
 		frame.add(panel);
 		frame.pack();
 		panel.add(label);
+		panel.add(liveCount);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.addKeyListener(this);
@@ -53,6 +55,7 @@ public class Hangman implements KeyListener {
 		newDisplay = sb.toString();
 		newLetter = newDisplay.toCharArray();
 		label.setText(newDisplay);
+
 	}
 
 	@Override
@@ -64,6 +67,7 @@ public class Hangman implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		liveCount.setText(""+lives);
 		int charPosition = 0;
 		char pressed1 = e.getKeyChar();
 
@@ -94,6 +98,18 @@ public class Hangman implements KeyListener {
 
 		} else {
 			lives--;
+			if (lives==0) {
+				System.out.println("Game Over!!!!!! Restarting...");
+				lives=50;
+				displayPop = rounds.pop();
+				sb = new StringBuilder(displayPop.length());
+				for (int j = 0; j < displayPop.length(); j++) {
+					sb.append("_ ");
+				}
+				newDisplay = sb.toString();
+				newLetter = newDisplay.toCharArray();
+				label.setText(newDisplay);
+			}
 		}
 	}
 
