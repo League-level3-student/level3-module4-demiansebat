@@ -44,7 +44,7 @@ if(nearCell.isEmpty()==false) {
         // C1. select one at random.
 nearCell.get(randGen.nextInt(nearCell.size()));
         // C2. push it to the stack
-
+//need to push
         // C3. remove the wall between the two cells
 
         // C4. make the new cell the current cell and SET it as visited
