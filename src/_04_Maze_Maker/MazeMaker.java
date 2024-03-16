@@ -42,20 +42,50 @@ ArrayList<Cell> nearCell=getUnvisitedNeighbors(currentCell);
         // C. if has unvisited neighbors,
 if(nearCell.isEmpty()==false) {
         // C1. select one at random.
-nearCell.get(randGen.nextInt(nearCell.size()));
+Cell NewCell=nearCell.get(randGen.nextInt(nearCell.size()));
         // C2. push it to the stack
-//need to push
+uncheckedCells.push(NewCell);
+int NewCelly= NewCell.getRow();
+int NewCellx= NewCell.getCol();
+int currentCellx= NewCell.getCol();
+int currentCelly= currentCell.getRow();
+
+if(NewCellx>currentCellx) {
+	NewCell.setWestWall(false);
+	currentCell.setEastWall(false);
+}
+if(NewCellx<currentCellx) {
+	NewCell.setEastWall(false);
+	currentCell.setWestWall(false);
+}
+if(NewCelly>currentCelly) {
+	NewCell.setSouthWall(false);
+	currentCell.setNorthWall(false);
+}
+if(NewCelly<currentCelly) {
+	NewCell.setNorthWall(false);
+	currentCell.setSouthWall(false);
+}
+	
         // C3. remove the wall between the two cells
-
+//above
         // C4. make the new cell the current cell and SET it as visited
-
+currentCell=NewCell;
+currentCell.setBeenVisited(true);
         // C5. call the selectNextPath method with the current cell
     }
 
         // D. if all neighbors are visited
-
+if(nearCell.size()==4) {
+	selectNextPath(currentCell);
+}
         // D1. if the stack is not empty
-
+if(uncheckedCells.isEmpty()==false) {
+	selectNextPath(currentCell);
+	Cell popCell=uncheckedCells.pop();
+	currentCell=popCell;
+	selectNextPath(currentCell);
+}
         // D1a. pop a cell from the stack
 
         // D1b. make that the current cell
